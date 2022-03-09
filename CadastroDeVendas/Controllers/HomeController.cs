@@ -17,7 +17,8 @@ namespace CadastroDeVendas.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message1"] ="Encontrando o ponto ideal";
+            ViewData["Meunome"] = "Israel Ribeiro";
 
             return View();
         }
