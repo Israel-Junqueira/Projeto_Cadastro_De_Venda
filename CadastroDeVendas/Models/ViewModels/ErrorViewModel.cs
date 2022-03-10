@@ -1,11 +1,12 @@
 using System;
 
-namespace CadastroDeVendas.Models
+namespace CadastroDeVendas.Models.ViewModels
 {
     public class ErrorViewModel
     {
         public string RequestId { get; set; }
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+
     }
 }

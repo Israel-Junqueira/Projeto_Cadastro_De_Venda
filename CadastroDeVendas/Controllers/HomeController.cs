@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-
+using CadastroDeVendas.Models.ViewModels;
 namespace CadastroDeVendas.Controllers
 {
     public class HomeController : Controller
@@ -18,7 +18,7 @@ namespace CadastroDeVendas.Controllers
         public IActionResult About()
         {
             ViewData["Message1"] ="Encontrando o ponto ideal";
-            ViewData["Meunome"] = "Israel Ribeiro";
+            ViewData["Meunome"] = "israel Ribeiro";
 
             return View();
         }
