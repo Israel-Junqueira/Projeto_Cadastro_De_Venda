@@ -35,18 +35,21 @@ namespace CadastroDeVendas
             services.AddDbContext<CadastroDeVendasContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("CadastroDeVendasContext"), builder =>
                     builder.MigrationsAssembly("CadastroDeVendas")));
+
+            services.AddScoped<SeedingService>(); // adicionei para injetar o addServices. //gestão de dependencia
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,SeedingService seeding)//chamei aqui no parametro a classe SeedingService
         {
-            if (env.IsDevelopment())
+            if (env.IsDevelopment()) //se eu estou no perfil de desenvolvimento
             {
                 app.UseDeveloperExceptionPage();
+                seeding.Seed();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Home/Error"); //se estiver no de produção (executando)
                 app.UseHsts();
             }
 
