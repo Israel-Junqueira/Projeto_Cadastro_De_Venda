@@ -3,14 +3,16 @@ using System;
 using CadastroDeVendas.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CadastroDeVendas.Migrations
 {
     [DbContext(typeof(CadastroDeVendasContext))]
-    partial class CadastroDeVendasContextModelSnapshot : ModelSnapshot
+    [Migration("20220311151727_OtherEntities")]
+    partial class OtherEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

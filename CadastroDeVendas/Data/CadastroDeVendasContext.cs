@@ -9,11 +9,14 @@ namespace CadastroDeVendas.Data
 {
     public class CadastroDeVendasContext : DbContext
     {
-        public CadastroDeVendasContext (DbContextOptions<CadastroDeVendasContext> options)
-            : base(options)
+        public CadastroDeVendasContext (DbContextOptions<CadastroDeVendasContext> options) : base(options)
         {
         }
 
-        public DbSet<CadastroDeVendas.Models.Department> Department { get; set; }
+        public DbSet<Department> Department { get; set; }
+        public DbSet<SalesRecord> SalesRecords { get; set; }
+        public DbSet<Seller> Sellers { get; set; }
+
+
     }
 }
