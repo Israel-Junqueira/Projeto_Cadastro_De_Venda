@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using CadastroDeVendas.Models;
 using CadastroDeVendas.Data;
+using CadastroDeVendas.Services;
 
 namespace CadastroDeVendas
 {
@@ -37,6 +38,7 @@ namespace CadastroDeVendas
                     builder.MigrationsAssembly("CadastroDeVendas")));
 
             services.AddScoped<SeedingService>(); // adicionei para injetar o addServices. //gestão de dependencia
+            services.AddScoped<SellerServiceClass>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
