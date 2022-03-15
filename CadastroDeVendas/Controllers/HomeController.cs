@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using CadastroDeVendas.Models.ViewModels;
+
 namespace CadastroDeVendas.Controllers
 {
     public class HomeController : Controller
