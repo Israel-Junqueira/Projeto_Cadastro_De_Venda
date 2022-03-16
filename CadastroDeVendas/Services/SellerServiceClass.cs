@@ -2,7 +2,7 @@
 using CadastroDeVendas.Models;
 using System.Collections.Generic;
 using System.Linq;
-
+using Microsoft.EntityFrameworkCore;
 namespace CadastroDeVendas.Services
 {
     public class SellerServiceClass
@@ -31,8 +31,8 @@ namespace CadastroDeVendas.Services
 
         //Delete seller
         public Seller FindById(int id)
-        {
-                return _context.Sellers.FirstOrDefault(obj => obj.Id == id);
+        {                               //inclui o include para bostrar o department do vendedor
+                return _context.Sellers.Include(obj => obj.Department).FirstOrDefault(obj => obj.Id == id);
         }
 
         public void remove(int id)
