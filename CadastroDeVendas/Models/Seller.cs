@@ -14,7 +14,7 @@ namespace CadastroDeVendas.Models
         public DateTime BirthData { get; set; }
         public double BaseSalary { get; set; }
         public Department Department { get; set; } //pois os vendedores possui uma venda
-
+        public int DepartmentId { get; set; }// garante que o Id exista e a coluna não fique nula
         public List<SalesRecord> records { get; set; } = new List<SalesRecord>(); //pois os vendedores possuem varias vendas
 
         public Seller()

@@ -24,6 +24,7 @@ namespace CadastroDeVendas.Services
 
         public void insert(Seller obj) //usei para inserir o os dadosque iram criar o vendedor no banco de dados.
         {
+           // obj.Department = _context.Department.First();//pega o primeiro departamento do banco de dados e associa ao vendedor
             _context.Add(obj);
             _context.SaveChanges();
         }
