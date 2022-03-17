@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using CadastroDeVendas.Models;
 using CadastroDeVendas.Data;
 using CadastroDeVendas.Services;
+using System.Globalization;//para localização
+using Microsoft.AspNetCore.Localization; //para localização
+using System.Collections.Generic;
 
 namespace CadastroDeVendas
 {
@@ -45,6 +48,17 @@ namespace CadastroDeVendas
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env,SeedingService seeding)//chamei aqui no parametro a classe SeedingService
         {
+            var enUS = new CultureInfo("en-US"); // adicionei para colocar a localização
+            var localizationOption = new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(enUS),
+                SupportedCultures = new List<CultureInfo> { enUS },     // adicionei para colocar a localização
+                SupportedUICultures = new List<CultureInfo> { enUS }
+            };
+            app.UseRequestLocalization(localizationOption); // adicionei para colocar a localização
+
+
+
             if (env.IsDevelopment()) //se eu estou no perfil de desenvolvimento
             {
                 app.UseDeveloperExceptionPage();
