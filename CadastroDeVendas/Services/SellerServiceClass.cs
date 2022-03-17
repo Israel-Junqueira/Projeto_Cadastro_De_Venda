@@ -3,6 +3,8 @@ using CadastroDeVendas.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using CadastroDeVendas.Services.Exceptions;
+
 namespace CadastroDeVendas.Services
 {
     public class SellerServiceClass
@@ -41,6 +43,24 @@ namespace CadastroDeVendas.Services
             _context.Sellers.Remove(obj);
             _context.SaveChanges();
         }
+
+        public void Update(Seller obj)
+        {                       //any ele procura o obj pra ve se existe 
+            //leitura: Se não existir 
+            if (!_context.Sellers.Any(x => x.Id == obj.Id))
+            {
+                throw new NotFoundException("ID not found");
+            }
+            try
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException e )
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
+        }  
 
     }
 }
