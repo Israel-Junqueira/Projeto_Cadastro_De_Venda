@@ -36,6 +36,14 @@ namespace CadastroDeVendas.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Seller seller)
         {
+            if (!ModelState.IsValid)  // não esqueça de usar isso para que a pessoa não desabilite o java e ainda sim consiga cadastrar
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+               
+            }
+
             _sellerService.insert(seller);
             return RedirectToAction(nameof(Index));
         }
@@ -99,7 +107,14 @@ namespace CadastroDeVendas.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id,Seller seller)
         {
-           if (id != seller.Id)
+            if (!ModelState.IsValid)  // não esqueça de usar isso para que a pessoa não desabilite o java e ainda sim consiga cadastrar
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller=seller,Departments = departments };
+                return View(viewModel);
+            }
+
+            if (id != seller.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not id mismatch" });
             }
