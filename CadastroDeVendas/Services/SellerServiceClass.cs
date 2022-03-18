@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using CadastroDeVendas.Services.Exceptions;
+using System.Threading.Tasks;
 
 namespace CadastroDeVendas.Services
 {
@@ -18,43 +19,44 @@ namespace CadastroDeVendas.Services
             _context = context;
         }
         // agr criar a lista q retorne os vendedores
-        public List<Seller> FindAll()
+        public async Task<List<Seller>> FindAllAsync()
         {
-            return _context.Sellers.ToList();
+            return await _context.Sellers.ToListAsync();
                    
         }
 
-        public void insert(Seller obj) //usei para inserir o os dados que irão criar o vendedor no banco de dados.
+        public async Task insertAsync(Seller obj) //usei para inserir o os dados que irão criar o vendedor no banco de dados.
         {
            // obj.Department = _context.Department.First();//pega o primeiro departamento do banco de dados e associa ao vendedor
             _context.Add(obj);
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
 
         //Delete seller
-        public Seller FindById(int id)
+        public async  Task<Seller> FindByIdAsync(int id)
         {                               //inclui o include para bostrar o department do vendedor
-                return _context.Sellers.Include(obj => obj.Department).FirstOrDefault(obj => obj.Id == id);
+                return await _context.Sellers.Include(obj => obj.Department).FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public void remove(int id)
+        public async Task remove(int id)
         {
-            var obj = _context.Sellers.Find(id);
+            var obj =await _context.Sellers.FindAsync(id);
             _context.Sellers.Remove(obj);
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
 
-        public void Update(Seller obj)
+        public async Task UpdateAsync(Seller obj)
         {                       //any ele procura o obj pra ve se existe 
             //leitura: Se não existir 
-            if (!_context.Sellers.Any(x => x.Id == obj.Id))
+            bool HasAny = await _context.Sellers.AnyAsync(x => x.Id == obj.Id);
+            if (!HasAny)
             {
                 throw new NotFoundException("ID not found");
             }
             try
             {
-                _context.Update(obj);
-                _context.SaveChanges();
+                 _context.Update(obj);
+               await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException e )
             {
