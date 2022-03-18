@@ -38,11 +38,18 @@ namespace CadastroDeVendas.Services
                 return await _context.Sellers.Include(obj => obj.Department).FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public async Task remove(int id)
+        public async Task removeAsync(int id)
         {
-            var obj =await _context.Sellers.FindAsync(id);
-            _context.Sellers.Remove(obj);
-           await _context.SaveChangesAsync();
+            try
+            {
+                var obj = await _context.Sellers.FindAsync(id);
+                _context.Sellers.Remove(obj);
+                await _context.SaveChangesAsync();
+            }catch (DbUpdateException e)
+            {
+                throw new IntegraityException("O vendedor não pode ser excluido pois ele tem vendas cadastradas");
+                
+            }
         }
 
         public async Task UpdateAsync(Seller obj)
