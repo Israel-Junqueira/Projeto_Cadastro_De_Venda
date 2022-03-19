@@ -43,6 +43,7 @@ namespace CadastroDeVendas
             services.AddScoped<SeedingService>(); // adicionei para injetar o addServices. //gestão de dependencia
             services.AddScoped<SellerServiceClass>();
             services.AddScoped<DepartmentService>();
+            services.AddScoped<SalesRecordService>(); //adicionado a nova dependencia do Serviços sales Record Service
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
